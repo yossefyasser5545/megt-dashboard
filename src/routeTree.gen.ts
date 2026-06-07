@@ -15,6 +15,10 @@ import { Route as DashboardIndexRouteImport } from './routes/_dashboard.index'
 import { Route as DashboardQuotesRouteImport } from './routes/_dashboard.quotes'
 import { Route as DashboardContactRequestsRouteImport } from './routes/_dashboard.contact-requests'
 import { Route as DashboardContactInfoRouteImport } from './routes/_dashboard.contact-info'
+import { Route as DashboardBlogsCrcopyRouteImport } from './routes/_dashboard.blogs-cr copy'
+import { Route as DashboardBlogsCrRouteImport } from './routes/_dashboard.blogs-cr'
+import { Route as DashboardBlogsRouteImport } from './routes/_dashboard.blogs'
+import { Route as DashboardAgentRequestsRouteImport } from './routes/_dashboard.agent-requests'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -46,16 +50,44 @@ const DashboardContactInfoRoute = DashboardContactInfoRouteImport.update({
   path: '/contact-info',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardBlogsCrcopyRoute = DashboardBlogsCrcopyRouteImport.update({
+  id: '/blogs-cr copy',
+  path: '/blogs-cr copy',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardBlogsCrRoute = DashboardBlogsCrRouteImport.update({
+  id: '/blogs-cr',
+  path: '/blogs-cr',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardBlogsRoute = DashboardBlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAgentRequestsRoute = DashboardAgentRequestsRouteImport.update({
+  id: '/agent-requests',
+  path: '/agent-requests',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof DashboardIndexRoute
   '/login': typeof LoginRoute
+  '/agent-requests': typeof DashboardAgentRequestsRoute
+  '/blogs': typeof DashboardBlogsRoute
+  '/blogs-cr': typeof DashboardBlogsCrRoute
+  '/blogs-cr copy': typeof DashboardBlogsCrcopyRoute
   '/contact-info': typeof DashboardContactInfoRoute
   '/contact-requests': typeof DashboardContactRequestsRoute
   '/quotes': typeof DashboardQuotesRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/agent-requests': typeof DashboardAgentRequestsRoute
+  '/blogs': typeof DashboardBlogsRoute
+  '/blogs-cr': typeof DashboardBlogsCrRoute
+  '/blogs-cr copy': typeof DashboardBlogsCrcopyRoute
   '/contact-info': typeof DashboardContactInfoRoute
   '/contact-requests': typeof DashboardContactRequestsRoute
   '/quotes': typeof DashboardQuotesRoute
@@ -65,6 +97,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/_dashboard/agent-requests': typeof DashboardAgentRequestsRoute
+  '/_dashboard/blogs': typeof DashboardBlogsRoute
+  '/_dashboard/blogs-cr': typeof DashboardBlogsCrRoute
+  '/_dashboard/blogs-cr copy': typeof DashboardBlogsCrcopyRoute
   '/_dashboard/contact-info': typeof DashboardContactInfoRoute
   '/_dashboard/contact-requests': typeof DashboardContactRequestsRoute
   '/_dashboard/quotes': typeof DashboardQuotesRoute
@@ -72,13 +108,35 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/contact-info' | '/contact-requests' | '/quotes'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/agent-requests'
+    | '/blogs'
+    | '/blogs-cr'
+    | '/blogs-cr copy'
+    | '/contact-info'
+    | '/contact-requests'
+    | '/quotes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/contact-info' | '/contact-requests' | '/quotes' | '/'
+  to:
+    | '/login'
+    | '/agent-requests'
+    | '/blogs'
+    | '/blogs-cr'
+    | '/blogs-cr copy'
+    | '/contact-info'
+    | '/contact-requests'
+    | '/quotes'
+    | '/'
   id:
     | '__root__'
     | '/_dashboard'
     | '/login'
+    | '/_dashboard/agent-requests'
+    | '/_dashboard/blogs'
+    | '/_dashboard/blogs-cr'
+    | '/_dashboard/blogs-cr copy'
     | '/_dashboard/contact-info'
     | '/_dashboard/contact-requests'
     | '/_dashboard/quotes'
@@ -134,10 +192,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardContactInfoRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/_dashboard/blogs-cr copy': {
+      id: '/_dashboard/blogs-cr copy'
+      path: '/blogs-cr copy'
+      fullPath: '/blogs-cr copy'
+      preLoaderRoute: typeof DashboardBlogsCrcopyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/blogs-cr': {
+      id: '/_dashboard/blogs-cr'
+      path: '/blogs-cr'
+      fullPath: '/blogs-cr'
+      preLoaderRoute: typeof DashboardBlogsCrRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/blogs': {
+      id: '/_dashboard/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof DashboardBlogsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/agent-requests': {
+      id: '/_dashboard/agent-requests'
+      path: '/agent-requests'
+      fullPath: '/agent-requests'
+      preLoaderRoute: typeof DashboardAgentRequestsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
 interface DashboardRouteChildren {
+  DashboardAgentRequestsRoute: typeof DashboardAgentRequestsRoute
+  DashboardBlogsRoute: typeof DashboardBlogsRoute
+  DashboardBlogsCrRoute: typeof DashboardBlogsCrRoute
+  DashboardBlogsCrcopyRoute: typeof DashboardBlogsCrcopyRoute
   DashboardContactInfoRoute: typeof DashboardContactInfoRoute
   DashboardContactRequestsRoute: typeof DashboardContactRequestsRoute
   DashboardQuotesRoute: typeof DashboardQuotesRoute
@@ -145,6 +235,10 @@ interface DashboardRouteChildren {
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAgentRequestsRoute: DashboardAgentRequestsRoute,
+  DashboardBlogsRoute: DashboardBlogsRoute,
+  DashboardBlogsCrRoute: DashboardBlogsCrRoute,
+  DashboardBlogsCrcopyRoute: DashboardBlogsCrcopyRoute,
   DashboardContactInfoRoute: DashboardContactInfoRoute,
   DashboardContactRequestsRoute: DashboardContactRequestsRoute,
   DashboardQuotesRoute: DashboardQuotesRoute,

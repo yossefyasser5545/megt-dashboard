@@ -1,12 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { LayoutDashboard, FileText, MessageSquare, Phone, X } from "lucide-react";
+import { LayoutDashboard, FileText, MessageSquare, Phone, UserCheck, X, NotebookText } from "lucide-react";
 import { Logo } from "./Logo";
 import { useI18n } from "@/i18n/I18nProvider";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 type NavItem = {
-  to: "/" | "/quotes" | "/contact-requests" | "/contact-info";
+  to: "/" | "/quotes" | "/agent-requests" | "/contact-requests" | "/blogs" | "/contact-info";
   labelKey: string;
   icon: typeof LayoutDashboard;
   exact?: boolean;
@@ -15,7 +15,9 @@ type NavItem = {
 const items: NavItem[] = [
   { to: "/", labelKey: "nav.overview", icon: LayoutDashboard, exact: true },
   { to: "/quotes", labelKey: "nav.quotes", icon: FileText },
+  { to: "/agent-requests", labelKey: "nav.agentRequests", icon: UserCheck },
   { to: "/contact-requests", labelKey: "nav.contactRequests", icon: MessageSquare },
+  { to: "/blogs", labelKey: "nav.blogs", icon: NotebookText },
   { to: "/contact-info", labelKey: "nav.contactInfo", icon: Phone },
 ];
 

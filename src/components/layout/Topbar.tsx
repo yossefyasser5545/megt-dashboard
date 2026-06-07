@@ -105,9 +105,15 @@ export function Topbar({
             <DropdownMenuItem><User className="me-2 h-4 w-4" />{t("nav.profile")}</DropdownMenuItem>
             <DropdownMenuItem><Settings className="me-2 h-4 w-4" />{t("nav.settings")}</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => navigate({ to: "/login" })}>
-              <LogOut className="me-2 h-4 w-4" />{t("nav.logout")}
-            </DropdownMenuItem>
+<DropdownMenuItem
+  onClick={() => {
+    localStorage.removeItem("token");
+    navigate({ to: "/login" });
+  }}
+>
+  <LogOut className="me-2 h-4 w-4" />
+  {t("nav.logout")}
+</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
